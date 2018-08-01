@@ -21,6 +21,12 @@ I think the order matters, at least I had the best luck with the following order
  1. `$ lerna bootstrap` - to link the packages, runs npm install in each, and allows you to reference them from each other
  2. `$ lerna link` - to link the packages
  3. `$ lerna run build` - builds all the packages for distribution
+ 
+To fix any tslint errors, i.e. `Import sources within a group must be alphabetized` run `$ tslint --project ./tsconfig.json --fix` and it should reorder them. Here are some import order guidelines:
+
+ 1. Installed packages or imports without a directory path should be first
+ 2. The `./` and `../` matter and should be in the same order
+ 3. Imports inside {} also should be alphabetized and case sensitive.
 
 
 

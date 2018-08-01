@@ -8,18 +8,13 @@ import logo from './logo.svg';
 
 // import Hello from './components/Hello';
 
-import Hello from './containers/Hello';
-
 import { Provider } from 'react-redux';
-
-import { enthusiasm } from './reducers/index';
-
-import { IStoreState } from './types/index';
-
 import { createStore } from 'redux';
 
 import { EnthusiasmAction } from './actions/index';
-
+import Hello from './containers/Hello';
+import { enthusiasm } from './reducers/index';
+import { IStoreState } from './types/index';
 
 const store = createStore<IStoreState, EnthusiasmAction, any, any>(enthusiasm, {
   enthusiasmLevel: 1,

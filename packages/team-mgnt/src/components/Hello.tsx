@@ -1,7 +1,6 @@
 // src/components/Hello.tsx
 
 import * as React from 'react';
-
 import './Hello.css';
 
 export interface IProps {
