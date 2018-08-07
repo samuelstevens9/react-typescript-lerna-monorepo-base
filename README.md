@@ -3,7 +3,7 @@
 ### Pre-Reqs
  * install [brew](https://brew.sh/)
  * install node & npm `$ brew install node` 
- * install [lerna](https://github.com/lerna/lerna)
+ * install [lerna](https://lernajs.io/)
     * optional install [lerna-wizard](https://github.com/szarouski/lerna-wizard)
  * install [create-react-app](https://github.com/facebook/create-react-app)
  * install [watchman](https://facebook.github.io/watchman/docs/install.html)
