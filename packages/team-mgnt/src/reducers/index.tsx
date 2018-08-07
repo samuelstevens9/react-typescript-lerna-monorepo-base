@@ -1,16 +1,21 @@
 // src/reducers/index.tsx
 
-import { EnthusiasmAction } from '../actions';
-import { DECREMENT_ENTHUSIASM, INCREMENT_ENTHUSIASM } from '../constants/index';
+import { FetchActions } from '../actions';
+import * as ACTION_TYPES from '../constants/index';
 import { IStoreState } from '../types/index';
 
 
-export function enthusiasm(state: IStoreState, action: EnthusiasmAction): IStoreState {
+export function loadFromServer(state: IStoreState, action: FetchActions ): IStoreState {
+    // console.log("reduce enthusiasm",state,action);
+    
     switch (action.type) {
-        case INCREMENT_ENTHUSIASM:
-            return { ...state, enthusiasmLevel: state.enthusiasmLevel + 1 };
-        case DECREMENT_ENTHUSIASM:
-            return { ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1) };
+        case ACTION_TYPES.FETCHING:
+            return { ...state, fetching: true };
+        case ACTION_TYPES.FETCH_ERROR:
+            return { ...state, fetching: false, fetch_error: action.error };
+        case ACTION_TYPES.FETCHED:
+            return { ...state, fetched: true, fetching: false, users: action.payload }
+        
     }
     return state;
 }

@@ -3,47 +3,26 @@ import * as React from 'react';
 import './App.css';
 
 // import HelloWorld from 'tsts';
-
-import logo from './logo.svg';
-
+// import logo from './logo.svg';
 // import Hello from './components/Hello';
+// import Hello from './containers/Hello';
 
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { Route } from 'react-router-dom';
 
-import { EnthusiasmAction } from './actions/index';
-import Hello from './containers/Hello';
-import { enthusiasm } from './reducers/index';
-import { IStoreState } from './types/index';
+import Team from './containers/Team';
 
-const store = createStore<IStoreState, EnthusiasmAction, any, any>(enthusiasm, {
-  enthusiasmLevel: 1,
-  languageName: 'TypeScript',
-});
+import {TLHeaderNavigation} from 'truthlab-uiux';
+// import {HelloWorld} from 'truthlab-uiux';
 
 class App extends React.Component {
   public render() {
-    // console.log(HelloWorld);
+    // console.log(HelloWorld,"TLHeaderNavigation", TLHeaderNavigation);
+    // console.log(TLUIUX.default);
     
     return (
-      <Provider store={store}>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <div>
-          <Hello />
-        </div>
-        <div>
-        {/* <HelloWorld color={"#FF0"} /> */}
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-
-      </div>
-      </Provider>
+      <TLHeaderNavigation>
+        <Route path="/team" component={Team} />
+      </TLHeaderNavigation>
     );
   }
 }

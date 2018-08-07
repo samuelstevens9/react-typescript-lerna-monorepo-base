@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { HelloWorldProps } from '../index';
 
-export default class HelloWorld extends React.Component<any, any> {
-  render() {
+export class HelloWorld extends React.Component<HelloWorldProps, any> {
+  public render() {
     return (
       <div style={{ color: this.props.color }}>
         Hello world!
