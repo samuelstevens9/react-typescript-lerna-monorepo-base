@@ -11,7 +11,7 @@
 ### Structure
 
  * `team-mgnt` - Single Page React TS App created via `create-react-app team-mgnt --scripts-version=react-scripts-ts`
- * `tsts` - React component in typescript that `team-mgnt` is dependednt on, created following [publishing-a-typescript-react-component-to-npm](https://medium.com/@jchiam/publishing-a-typescript-react-component-to-npm-d3cc15b8d0a2) 
+ * `truthlab-uiux` - React component in typescript that `team-mgnt` is dependent on, created following [publishing-a-typescript-react-component-to-npm](https://medium.com/@jchiam/publishing-a-typescript-react-component-to-npm-d3cc15b8d0a2) 
 
 
 ### Commands
@@ -19,8 +19,21 @@
 I think the order matters, at least I had the best luck with the following order: 
 
  1. `$ lerna bootstrap` - to link the packages, runs npm install in each, and allows you to reference them from each other
- 2. `$ lerna link` - to link the packages
+ 2. `$ lerna link` - to link the packages, **IMPORTANT**: run this after any `npm install ...` command to relink
  3. `$ lerna run build` - builds all the packages for distribution
+
+
+### Troubleshooting
+
+
+RE: npm install breaking link to `truthlab-uiux`, https://github.com/npm/npm/issues/17287
+
+```
+We are well aware of npm link issues, and it will be overhauled with npm@7 later this year. As @legodude17 says, please refer to https://npm.community/t/new-npm-link-command/24/1 for more information on this, and discussions about what it should do. Until then, consider npm as it is to be broken and the overhaul to be the fix.
+```
+
+For now use `$ lerna boostrap` instead of npm install and `$ lerna link` after installing single modules.
+
  
 To fix any tslint errors, i.e. `Import sources within a group must be alphabetized` run `$ tslint --project ./tsconfig.json --fix` and it should reorder them. Here are some import order guidelines:
 
