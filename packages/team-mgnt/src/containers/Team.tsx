@@ -6,15 +6,15 @@ import * as actions from '../actions/';
 import Team from '../components/Team';
 import { IStoreState } from '../types/index';
 
-export function mapStateToProps({ fetch_error, fetched, fetching, users }: IStoreState) {
+export function mapStateToProps({ fetch_error, fetched, fetching, permissions, users }: IStoreState) {
     return {
-        fetch_error, fetched, fetching, users
+        fetch_error, fetched, fetching, permissions, users, 
     }
 }
 
 export function mapDispatchToProps(dispatch: ThunkDispatch<IStoreState,void,actions.FetchActions>) {
     return {
-        fetchData: () => dispatch(actions.fetchData()),
+        fetchData: (url: string, stateKey: string) => dispatch(actions.fetchData(url,stateKey)),
     }
 }
 

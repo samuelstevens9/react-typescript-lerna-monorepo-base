@@ -1,6 +1,19 @@
 import * as React from 'react';
 import { TLCardProps, TLPageHeaderProps } from '../index';
 
+export class LoadingSpinner extends React.Component<any,any>{
+  public render(){
+    // <div style={{fontSize:72}}>
+    //   <i className="ti-reload rotate-refresh" />
+    // </div>
+    return(
+      <div style={{height:"100px"}}><div className="ball-scale">
+        <div />
+      </div></div>
+    )
+  }
+}
+
 export class TLCard extends React.Component<TLCardProps, any> {
   public render() {
     return (

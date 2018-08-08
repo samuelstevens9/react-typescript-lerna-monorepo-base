@@ -1,15 +1,17 @@
 // https://github.com/palantir/tslint-react/issues/96
 // tslint:disable jsx-no-lambda
 import * as React from 'react';
-// import { Link } from 'react-router-dom';
-import { TLCard, TLPageHeader } from 'truthlab-uiux';
+
+import { LoadingSpinner, TLCard, TLPageHeader } from 'truthlab-uiux';
+import { IFetchObject } from '../types';
 
 export interface IProps {
   fetch_error: string;
   fetched: boolean;
   fetching: boolean;
-  users: Array<{}>;
-  fetchData: () => void;
+  users: IFetchObject;
+  permissions: IFetchObject;
+  fetchData: (url:string,stateKey:string) => void;
 }
 
 // function Team({ email="", password="", onSetEmail, onSetPassword }: IProps) {
@@ -25,12 +27,14 @@ export default class Team extends React.Component<IProps, any> {
   }
   
   public componentDidMount(){
-    this.props.fetchData();
-    
+    // "/api/v1/customer/model/registered_users/"
+    this.props.fetchData("/api/v1/customer/model/registered_users/","users");
+    // /api/v1/customer/model/permissions/
+    this.props.fetchData("/api/v1/customer/model/permissions/", "permissions");
   }
 
   public render(){
-    console.log("fetch_error",this.props.fetch_error);
+    console.log("this.props.users", this.props.users, "this.props.permissions",this.props.permissions);
     
     return (
       <div className="row">
@@ -38,21 +42,20 @@ export default class Team extends React.Component<IProps, any> {
           <TLPageHeader title="Team Management" />
           
           <TLCard>
-            {this.props.fetching?
-              <div style={{fontSize:72}}>
-                <i className="ti-reload rotate-refresh" />
-              </div>:this.props.fetched?
-            
+            {this.props.users && !this.props.users.fetching?
+              this.props.fetched?
               <div className="table-responsive">
                 <table className="table table-xl">
                   <thead>
                     <tr><th>Name</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>Sam Stevens</td></tr>
+                      {this.props.users && this.props.users.data.map((ru:any,i)=>(
+                        <tr key={i}><td>{ru.user.first_name+" "+ru.user.last_name}</td></tr>
+                      ))}
                   </tbody>
                 </table>
-                </div> : this.props.fetch_error }
+                </div> : this.props.fetch_error : <LoadingSpinner /> }
           </TLCard>
 
         </div>

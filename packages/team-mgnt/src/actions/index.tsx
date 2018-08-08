@@ -9,29 +9,32 @@ import { IStoreState } from '../types/index';
 // Load Data From Server Actions
 export interface IFetching {
     type: constants.FETCHING;
+    stateKey: string;
 }
 export interface IFetched {
     type: constants.FETCHED;
     payload: Array<{}>;
+    stateKey: string;
 }
 export interface IFetchError {
     type: constants.FETCH_ERROR;
     error: string;
+    stateKey: string;
 }
 
 export type FetchActions = IFetching | IFetched | IFetchError;
 
 export type ThunkResult<R> = ThunkAction<R, IStoreState, undefined, FetchActions>;
-export function fetchData(): ThunkResult<void>{
+export function fetchData(url:string,stateKey1:string): ThunkResult<void>{
     return (dispatch) => {
-        dispatch({ type: constants.FETCHING });
+        dispatch({ type: constants.FETCHING, stateKey: stateKey1 });
 
-        axios.get("/api/v1/customer/model/registered_users/")
+        axios.get(url)
             .then((response:any) => {
-                dispatch({ type: constants.FETCHED, payload: response.data })
+                dispatch({ type: constants.FETCHED, stateKey: stateKey1, payload: response.data })
             })
             .catch((err:Error) => {
-                dispatch({ type: constants.FETCH_ERROR, error: err.message })
+                dispatch({ type: constants.FETCH_ERROR, stateKey: stateKey1, error: err.message })
             })
     }
 }

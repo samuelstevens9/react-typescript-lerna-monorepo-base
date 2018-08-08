@@ -7,6 +7,8 @@ export interface HelloWorldProps extends React.Props<HelloWorld> {
 }
 export declare class HelloWorld extends React.Component<HelloWorldProps, any> {}
 
+export declare class LoadingSpinner extends React.Component<any, any> { }
+
 export interface TLHeaderNavigationProps extends React.Props<TLHeaderNavigation>{
   children?: any,
 }
